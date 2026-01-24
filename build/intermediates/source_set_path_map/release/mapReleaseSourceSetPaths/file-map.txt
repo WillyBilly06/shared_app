@@ -1,0 +1,10 @@
+com.example.myspeaker.shared-pngs-0 C:\Users\ngocv\AndroidStudioProjects\MySpeakerControl\shared\build\generated\res\pngs\release
+com.example.myspeaker.shared-resValues-1 C:\Users\ngocv\AndroidStudioProjects\MySpeakerControl\shared\build\generated\res\resValues\release
+com.example.myspeaker.shared-updated_navigation_xml-2 C:\Users\ngocv\AndroidStudioProjects\MySpeakerControl\shared\build\generated\updated_navigation_xml\release
+com.example.myspeaker.shared-mergeReleaseResources-3 C:\Users\ngocv\AndroidStudioProjects\MySpeakerControl\shared\build\intermediates\incremental\release\mergeReleaseResources\merged.dir
+com.example.myspeaker.shared-mergeReleaseResources-4 C:\Users\ngocv\AndroidStudioProjects\MySpeakerControl\shared\build\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+com.example.myspeaker.shared-release-5 C:\Users\ngocv\AndroidStudioProjects\MySpeakerControl\shared\build\intermediates\merged_res\release\mergeReleaseResources
+com.example.myspeaker.shared-androidMain-6 C:\Users\ngocv\AndroidStudioProjects\MySpeakerControl\shared\src\androidMain\res
+com.example.myspeaker.shared-androidRelease-7 C:\Users\ngocv\AndroidStudioProjects\MySpeakerControl\shared\src\androidRelease\res
+com.example.myspeaker.shared-main-8 C:\Users\ngocv\AndroidStudioProjects\MySpeakerControl\shared\src\main\res
+com.example.myspeaker.shared-release-9 C:\Users\ngocv\AndroidStudioProjects\MySpeakerControl\shared\src\release\res
