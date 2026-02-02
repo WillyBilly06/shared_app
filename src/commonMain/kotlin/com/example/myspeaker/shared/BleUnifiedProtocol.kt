@@ -144,11 +144,12 @@ object BleUnifiedProtocol {
         r2: Int, g2: Int, b2: Int,
         gradient: Int
     ): ByteArray {
+        // Send 0-100 directly - ESP32 handles conversion to 0-255
         return byteArrayOf(
             Cmd.SET_LED,
             effectId.toByte(),
-            brightness.toByte(),
-            speed.toByte(),
+            brightness.coerceIn(0, 100).toByte(),
+            speed.coerceIn(0, 100).toByte(),
             r1.toByte(), g1.toByte(), b1.toByte(),
             r2.toByte(), g2.toByte(), b2.toByte(),
             gradient.toByte()
@@ -160,7 +161,8 @@ object BleUnifiedProtocol {
     }
     
     fun buildSetLedBrightness(brightness: Int): ByteArray {
-        return byteArrayOf(Cmd.SET_LED_BRIGHT, brightness.toByte())
+        // Send 0-100 directly - ESP32 handles conversion to 0-255
+        return byteArrayOf(Cmd.SET_LED_BRIGHT, brightness.coerceIn(0, 100).toByte())
     }
     
     fun buildSoundMute(muted: Boolean): ByteArray {
@@ -250,10 +252,13 @@ object BleUnifiedProtocol {
     
     fun parseStatusLed(data: ByteArray): StatusLed? {
         if (data.size < 10) return null
+        // ESP32 already sends brightness/speed as 0-100
+        val brightness = data[1].toInt() and 0xFF
+        val speed = data[2].toInt() and 0xFF
         return StatusLed(
             effectId = data[0].toInt() and 0xFF,
-            brightness = data[1].toInt() and 0xFF,
-            speed = data[2].toInt() and 0xFF,
+            brightness = brightness.coerceIn(0, 100),
+            speed = speed.coerceIn(0, 100),
             r1 = data[3].toInt() and 0xFF,
             g1 = data[4].toInt() and 0xFF,
             b1 = data[5].toInt() and 0xFF,
@@ -280,11 +285,14 @@ object BleUnifiedProtocol {
         // Control (1 byte)
         val controlByte = data[idx++].toInt() and 0xFF
         
-        // LED (10 bytes)
+        // LED (10 bytes) - ESP32 already sends brightness/speed as 0-100
+        val ledEffectId = data[idx++].toInt() and 0xFF
+        val ledBrightness = data[idx++].toInt() and 0xFF  // Already 0-100 from ESP32
+        val ledSpeed = data[idx++].toInt() and 0xFF       // Already 0-100 from ESP32
         val led = StatusLed(
-            effectId = data[idx++].toInt() and 0xFF,
-            brightness = data[idx++].toInt() and 0xFF,
-            speed = data[idx++].toInt() and 0xFF,
+            effectId = ledEffectId,
+            brightness = ledBrightness.coerceIn(0, 100),
+            speed = ledSpeed.coerceIn(0, 100),
             r1 = data[idx++].toInt() and 0xFF,
             g1 = data[idx++].toInt() and 0xFF,
             b1 = data[idx++].toInt() and 0xFF,
